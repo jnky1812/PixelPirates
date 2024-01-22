@@ -15,6 +15,8 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
+	//Check Begin play is firing
+	UE_LOG(LogTemp, Warning, TEXT("Begin Play Called!"));
 	
 }
 
