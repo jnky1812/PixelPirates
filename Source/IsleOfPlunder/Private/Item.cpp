@@ -1,11 +1,7 @@
 // Copyright of Pixel Piratez
 
-
 #include "IsleOfPlunder/Public/Item.h"
-#include "DrawDebugHelpers.h"
-#include "IsleOfPlunder/IsleOfPlunder.h"
-
-#define THIRTY 30
+#include "IsleOfPlunder/DebugMacros.h"
 
 
 // Sets default values
@@ -20,18 +16,18 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	//Check Begin play is firing
-	UE_LOG(LogTemp, Warning, TEXT("Begin Play Called!"));
 
-	if(GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Item OnScreen Message!"));
-	}
 
 	UWorld* World = GetWorld();
-	
 	FVector Location = GetActorLocation();
-	DRAW_SPHERE(Location);
+	FVector Forward = GetActorForwardVector();
+	FVector BoxSize = FVector(30,30,30);
+
+	DRAW_BOX(Location, BoxSize);
+	DRAW_SPHERE(Location, FColor::Emerald);
+	//DRAW_LINE(Location, Location + Forward * 100.f);
+	//DRAW_POINT(Location + Forward * 100.f);
+	DRAW_VECTOR(Location, Location + Forward * 100.f);
 	
 }
 
@@ -39,17 +35,6 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime)
-
-	if(GEngine)
-	{
-		FString Name = GetName();
-		FString Message = FString::Printf(TEXT("Item Name: %s"), *Name);
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, Message);
-
-		UE_LOG(LogTemp, Warning, TEXT("Item Name: %s"), *Name)
-	}
-
+	
 }
 
