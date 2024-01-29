@@ -9,25 +9,12 @@ AItem::AItem()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-
-
-	UWorld* World = GetWorld();
-	FVector Location = GetActorLocation();
-	FVector Forward = GetActorForwardVector();
-	FVector BoxSize = FVector(30,30,30);
-
-	DRAW_BOX(Location, BoxSize);
-	DRAW_SPHERE(Location, FColor::Emerald);
-	//DRAW_LINE(Location, Location + Forward * 100.f);
-	//DRAW_POINT(Location + Forward * 100.f);
-	DRAW_VECTOR(Location, Location + Forward * 100.f);
 	
 }
 
@@ -35,6 +22,15 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	RunningTime += DeltaTime;
+
+	float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant); // period = 2*pi/K
+
+	AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
+	
+	DRAW_SPHERE_SingleFrame(GetActorLocation(), FColor::Red);
+	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
 	
 }
 
