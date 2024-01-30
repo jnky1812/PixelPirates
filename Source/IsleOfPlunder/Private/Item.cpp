@@ -18,6 +18,16 @@ void AItem::BeginPlay()
 	
 }
 
+float AItem::TransformedSin()
+{
+	return Amplitude * FMath::Sin(RunningTime * TimeConstant); // period = 2*pi/K
+}
+
+float AItem::TransformedCos()
+{
+	return Amplitude * FMath::Cos(RunningTime * TimeConstant); // period = 2*pi/K
+}
+
 // Called every frame
 void AItem::Tick(float DeltaTime)
 {
@@ -25,9 +35,9 @@ void AItem::Tick(float DeltaTime)
 
 	RunningTime += DeltaTime;
 
-	float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant); // period = 2*pi/K
+	//float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant); // period = 2*pi/K
 
-	AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
+	//AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
 	
 	DRAW_SPHERE_SingleFrame(GetActorLocation(), FColor::Red);
 	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
