@@ -41,6 +41,7 @@ void AItem::Tick(float DeltaTime)
 	DRAW_SPHERE_SingleFrame(GetActorLocation(), FColor::Red);
 	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
 
+	//Template functions
 	FVector AveVector = Avg<FVector>(GetActorLocation(), FVector::ZeroVector);
 	DRAW_POINT_SingleFrame(AveVector);
 }
