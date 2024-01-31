@@ -15,7 +15,7 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 float AItem::TransformedSin()
@@ -36,11 +36,12 @@ void AItem::Tick(float DeltaTime)
 	RunningTime += DeltaTime;
 
 	//float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant); // period = 2*pi/K
-
 	//AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
 	
 	DRAW_SPHERE_SingleFrame(GetActorLocation(), FColor::Red);
 	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
-	
+
+	FVector AveVector = Avg<FVector>(GetActorLocation(), FVector::ZeroVector);
+	DRAW_POINT_SingleFrame(AveVector);
 }
 
