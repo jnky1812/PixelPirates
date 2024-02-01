@@ -1,10 +1,11 @@
 // Copyright of Pixel Piratez
 
 #pragma once
-
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Bird.generated.h"
+
+class UCapsuleComponent;
 
 UCLASS()
 class ISLEOFPLUNDER_API ABird : public APawn
@@ -21,5 +22,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+private:
+	UPROPERTY(VisibleAnywhere)
+	UCapsuleComponent* Capsule;
 };
